@@ -526,6 +526,12 @@ select:focus,input:focus{border-color:#4b8fc8;box-shadow:0 0 0 4px rgba(36,117,1
   max-width:none !important;
   box-sizing:border-box !important;
 }
+/* iPad/tablet: name section across full width */
+.field:has(#name){
+  grid-column:1 / -1 !important;
+  width:100% !important;
+}
+  
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0d1d58">
