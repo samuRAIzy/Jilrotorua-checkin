@@ -535,11 +535,12 @@ select:focus,input:focus{border-color:#4b8fc8;box-shadow:0 0 0 4px rgba(36,117,1
 @media (orientation: landscape) and (max-height: 900px) {
 
   .jil-banner-only img{
+    height: 210px !important;
     max-height: 210px !important;
     width: 100% !important;
-    object-fit: contain !important;
-    object-position: center !important;
-  }
+    object-fit: cover !important;
+    object-position: center bottom !important;
+}
 
   .main{
     padding-top: 12px !important;
