@@ -531,7 +531,36 @@ select:focus,input:focus{border-color:#4b8fc8;box-shadow:0 0 0 4px rgba(36,117,1
   grid-column:1 / -1 !important;
   width:100% !important;
 }
-  
+
+  /* Hide purple image */
+.jil-banner-only{
+  display:none !important;
+}
+
+/* Soft background cross */
+.panel{
+  position:relative;
+  overflow:hidden;
+}
+
+.panel::after{
+  content:"✝";
+  position:absolute;
+  right:6%;
+  top:18%;
+  font-size:360px;
+  line-height:1;
+  color:#0d5f9b;
+  opacity:0.045;
+  font-family:Georgia,serif;
+  pointer-events:none;
+  z-index:0;
+}
+
+.panel > *{
+  position:relative;
+  z-index:1;
+}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0d1d58">
