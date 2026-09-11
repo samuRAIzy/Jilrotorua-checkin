@@ -1047,7 +1047,77 @@ async function syncAllNow(showStatus=true){
 }
 
 $('syncBtn').onclick=()=>syncAllNow(true);
+async function refreshPeopleDatabase(){
+  if(!syncUrl){
+    msg('Online sync URL is missing. Open Online sync setup first.');
+    return;
+  }
+  if(!syncKey){
+    msg('Private sync key is missing. Open Online sync setup first.');
+    return;
+  }
+  if(!navigator.onLine){
+    msg('Device is offline. Connect to the internet to refresh the database.');
+    return;
+  }
 
+  try{
+    msg('Downloading Members and Visitors from Google Sheets...');
+
+    const response=await fetch(syncUrl,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify({
+        action:'getPeopleDatabase',
+        key:syncKey,
+        device:navigator.userAgent,
+        sentAt:new Date().toISOString()
+      })
+    });
+
+    const result=await response.json();
+
+    if(!result.ok){
+      msg(`Refresh Database failed: ${result.error || 'Unknown server error'}`);
+      return;
+    }
+
+    const data=result.data || {};
+    const downloadedMembers=Array.isArray(data.members) ? data.members : [];
+    const downloadedVisitors=Array.isArray(data.visitors) ? data.visitors : [];
+
+    const proceed=confirm(
+      `Google Sheets contains ${downloadedMembers.length} members and ${downloadedVisitors.length} visitors.\n\n` +
+      `Replace this device's local Members and Visitors database with this data?\n\n` +
+      `Attendance history on this device will NOT be changed.`
+    );
+
+    if(!proceed){
+      msg('Database refresh cancelled.');
+      return;
+    }
+
+    members=downloadedMembers;
+    visitors=downloadedVisitors.map(v=>({
+      ...v,
+      membershipStatus:v.converted ? 'Converted to Member' : 'Visitor'
+    }));
+
+    localStorage.setItem('jilRotoruaMembersV1',JSON.stringify(members));
+    localStorage.setItem('jilRotoruaVisitorsV1',JSON.stringify(visitors));
+
+    ensurePersonIds();
+    refreshNames();
+    renderAdmin();
+
+    msg(`✓ Database refreshed — ${members.length} members and ${visitors.length} visitors downloaded.`);
+
+  }catch(err){
+    msg(`Refresh Database error: ${err.message || err}`);
+  }
+}
+
+$('refreshDatabaseBtn').onclick=refreshPeopleDatabase;
 
 let adminMode='Member', editIndex=null;
 
