@@ -531,7 +531,40 @@ select:focus,input:focus{border-color:#4b8fc8;box-shadow:0 0 0 4px rgba(36,117,1
   grid-column:1 / -1 !important;
   width:100% !important;
 }
+/* iPad / tablet LANDSCAPE - fit check-in on one screen */
+@media (orientation: landscape) and (max-height: 900px) {
 
+  .jil-banner-only img{
+    max-height: 210px !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    object-position: center !important;
+  }
+
+  .main{
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  .panel{
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+
+  .hero{
+    margin-bottom: 8px !important;
+  }
+
+  .field{
+    margin-bottom: 6px !important;
+  }
+
+  input,
+  select,
+  button{
+    min-height: 38px !important;
+  }
+}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0d1d58">
