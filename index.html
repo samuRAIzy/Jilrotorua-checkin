@@ -494,6 +494,32 @@ select:focus,input:focus{border-color:#4b8fc8;box-shadow:0 0 0 4px rgba(36,117,1
 .man-card h3{margin:0 0 10px}.man-card.birthday{border-top:5px solid #ec4899}.man-card.anniversary{border-top:5px solid #8b5cf6}.man-card.visitors{border-top:5px solid #0ea5e9}
 .man-list{display:grid;gap:8px}.man-item{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:10px 12px;border-radius:10px;background:#f7fafc;border:1px solid #e6edf2}.man-item strong{display:block}.man-meta{font-size:12px;color:#647789;text-align:right}.man-empty{padding:16px;text-align:center;color:#738596;background:#f7fafc;border-radius:10px}
 @media(max-width:760px){.checkgrid,.man-grid{grid-template-columns:1fr}}
+/* Responsive JIL cross/logo */
+.jil-banner-only{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+}
+
+.jil-banner-only img{
+  width:100%;
+  max-width:420px;
+  height:auto;
+  object-fit:contain;
+}
+
+@media (max-width:1000px){
+  .jil-banner-only img{
+    max-width:300px;
+  }
+}
+
+@media (max-width:760px){
+  .jil-banner-only{
+    display:none;
+  }
+}
 </style>
 <link rel="manifest" href="manifest.webmanifest">
 <meta name="theme-color" content="#0d1d58">
