@@ -1,4 +1,4 @@
-const CACHE_NAME = "jil-checkin-v15";
+const CACHE_NAME = "jil-checkin-v16";
 
 const ASSETS = [
   "./",
